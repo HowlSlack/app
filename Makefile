@@ -6,6 +6,7 @@ GOTEST=$(GOCMD) test
 GOGET=$(GOCMD) get
 BINARY_NAME=howl-slack
 BINARY_UNIX=$(BINARY_NAME)_unix
+BINARY_ARM=$(BINARY_NAME)_arm
 
 all: build
 build:
@@ -24,8 +25,9 @@ deps:
 	$(GOGET) github.com/nlopes/slack
 	$(GOGET) github.com/hajimehoshi/oto
 	$(GOGET) github.com/jfreymuth/oggvorbis
+	$(GOGET) github.com/pkg/errors
 
 build-linux:
 	GOOS=linux GOARCH=amd64 $(GOBUILD) -o $(BINARY_UNIX) -v
 build-raspberry:
-	GOOS=linux GOARCH=arm GOARM=5 $(GOBUILD) -o $(BINARY_UNIX) -v
+	CC=arm-linux-gnueabihf-gcc GOOS=linux GOARCH=arm GOARM=6 CGO_ENABLED=1 $(GOBUILD) -o $(BINARY_ARM) -v

@@ -22,6 +22,10 @@ deps:
 	$(GOGET) github.com/faiface/beep
 	$(GOGET) github.com/aws/aws-sdk-go/aws
 	$(GOGET) github.com/nlopes/slack
+	$(GOGET) github.com/hajimehoshi/oto
+	$(GOGET) github.com/jfreymuth/oggvorbis
 
 build-linux:
 	GOOS=linux GOARCH=amd64 $(GOBUILD) -o $(BINARY_UNIX) -v
+build-raspberry:
+	GOOS=linux GOARCH=arm GOARM=5 $(GOBUILD) -o $(BINARY_UNIX) -v

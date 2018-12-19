@@ -12,7 +12,54 @@ An awesome program that reads out loud messages from slack channels.
 
 # Setup
 
-## AWS
+## Slack
+
+Go to
+
+```
+https://YOUR_SUBDOMAIN.slack.com/apps/manage/custom-integrations
+```
+
+1) Click on bots
+
+<img src="./com/slack-custom-integrations.png" alt="custom-integrations" width="50%" align="center" />
+
+2) Add a configuration
+
+<img src="./com/slack-add-configuration.png" alt="slack-add-configuration" width="50%" align="center" />
+
+3) Create a bot
+
+<img src="./com/slack-add-bot-integration.png" alt="add-bot-integration" width="50%" align="center" />
+
+4) Get your bot token
+
+<img src="./com/slack-get-the-token.png" alt="get-the-token" width="50%" align="center" />
+
+This the token you'll copy and paste in `config.json`
+
+```json
+{
+  "SlackToken": "PUT YOUR TOKEN HERE"
+}
+```
+
+5) Add the bot to a channel
+
+Assuming you called your bot `howl-bot`, create a channel or add it to an existing one.
+
+<img src="./com/channel-creation.png" alt="channel-creation" width="50%" align="center" />
+
+## Hardware
+
+There is some pre-built binaries here.
+
+At work we launch it on a Raspberry PI connected to speakers.
+
+
+<img src="./com/howl-slack-raspberry.jpg" alt="howl-slack-raspberry" width="50%" align="center" />
+
+### AWS
 
 Download the aws-cli for your system.
 Then configure it
@@ -21,7 +68,7 @@ Then configure it
 aws configure
 ```
 
-The app use the Polly service from S3.
+The app use the **Polly** service from S3.
 
 More info on pricing:
 
@@ -31,40 +78,33 @@ https://aws.amazon.com/polly/pricing/
 
 But it's **cheap**.
 
-## Slack
+### Run it
 
-Go to
+For Raspberry (or ARM based systems)
 
+```shell
+./builds/howl-slack_arm
 ```
-https://YOUR_SUBDOMAIN.slack.com/apps/manage/custom-integrations
+
+For x64 systems
+
+```shell
+./builds/howl-slack_unix
 ```
 
-and create a token for a bot.
 
-Assuming you called your bot `howl`, create a channel or add it to an existing one.
-
-<img src="./com/channel-creation.png" alt="channel-creation" width="50%" align="center" />
-
-
-## build
-
-Add the auth token in `config.json`
-
-```json
-{
-  "SlackToken": "your token"
-}
-```
+# Build
 
 Build the project:
 
-Go version needed: `go1.11.2`
+Go version needed: `> go1.11.2`
 
 ```shell
+make deps
 make
 ```
 
-Then just run the binary
+Then just run the binary.
 
 ```shell
 ./howl-slack

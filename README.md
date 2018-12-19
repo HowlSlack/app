@@ -10,6 +10,24 @@ An awesome program that reads out loud messages from slack channels.
 <br /><br />
 <br /><br />
 
+# What is Howl Slack ?
+
+HowlSlack is a bot that watches a channel's messages and read out louds them.
+We use it at work to make announcements through offices ! Each office has a small Raspberry PI connected to speakers which runs Howl Slack.
+
+We connected some endpoints of our API to Slack through Zappier. For example when someone orders something we have a message sent to Slack and then Howl Slack reads it and everyone hears:
+
+```
+🔊 Foo bar just ordered <something> for <that> amount of money ! Good Job !
+```
+
+There is pretty fun use cases for this ! As you can connect a lot of things to Slack but also you can type yourself messages.
+
+```
+🔊 John, you're fired
+🔊 Just kidding
+```
+
 # Setup
 
 ## Slack

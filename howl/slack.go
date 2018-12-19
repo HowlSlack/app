@@ -2,7 +2,8 @@ package howl
 
 import (
 	"fmt"
-	"os"
+	"log"
+	"regexp"
 
 	"github.com/nlopes/slack"
 )
@@ -13,6 +14,11 @@ var (
 
 	// OnMessage will receive slack messages
 	OnMessage chan string
+
+	// UserIDToDisplayName we will store user display name
+	// to avoid requesting the API each time there is a user mention
+	UserIDToDisplayName map[string]string
+	reUserIDs           *regexp.Regexp
 )
 
 // InitSlack will init the connection to slack
@@ -23,6 +29,8 @@ func InitSlack() {
 	go rtm.ManageConnection()
 
 	OnMessage = make(chan string)
+	UserIDToDisplayName = make(map[string]string)
+	reUserIDs = regexp.MustCompile(`<@(\S+)>`)
 }
 
 // ListenForEvents will wait for events
@@ -34,13 +42,38 @@ func ListenForEvents() {
 
 		// just connected
 		case *slack.ConnectedEvent:
-			fmt.Println("slack: connected")
+			log.Print("slack: connected")
 
 		// received a message
 		case *slack.MessageEvent:
 			if ev.Type == "message" {
-				fmt.Printf("slack: message: %v\n", ev.Text)
-				OnMessage <- ev.Text
+
+				message := ev.Text
+
+				// replace all userIDs with their display names
+				matches := reUserIDs.FindAllStringSubmatch(message, -1)
+				for _, match := range matches {
+					// string_to_replace = match[0]
+					userID := match[1]
+
+					// retrieve its display name
+					username, present := UserIDToDisplayName[userID]
+
+					if !present {
+						user, err := api.GetUserInfo(userID)
+						if err != nil {
+							username = ""
+						} else {
+							username = user.Profile.DisplayName
+						}
+					}
+
+					reUsername := regexp.MustCompile("<@" + userID + ">")
+					message = reUsername.ReplaceAllString(message, username)
+				}
+
+				log.Printf("slack: message: %v\n", message)
+				OnMessage <- message
 			}
 
 		// errors
@@ -48,8 +81,7 @@ func ListenForEvents() {
 			fmt.Printf("slackk: RTM err: %s\n", ev.Error())
 
 		case *slack.InvalidAuthEvent:
-			fmt.Println("slack: invalid credentials")
-			os.Exit(1)
+			log.Fatal("slack: invalid credentials")
 			return
 
 		default:

@@ -3,6 +3,7 @@ package howl
 import (
 	"fmt"
 	"log"
+	"os"
 	"regexp"
 
 	"github.com/nlopes/slack"
@@ -76,9 +77,9 @@ func ListenForEvents() {
 				OnMessage <- message
 			}
 
-		// errors
+			// errors
 		case *slack.RTMError:
-			fmt.Printf("slackk: RTM err: %s\n", ev.Error())
+			fmt.Fprintf(os.Stderr, "slack: RTM err: %s\n", ev.Error())
 
 		case *slack.InvalidAuthEvent:
 			log.Fatal("slack: invalid credentials")

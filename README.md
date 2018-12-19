@@ -40,19 +40,27 @@ https://YOUR_SUBDOMAIN.slack.com/apps/manage/custom-integrations
 
 1) Click on bots
 
+<p align="center">
 <img src="./com/slack-custom-integrations.png" alt="custom-integrations" width="50%" align="center" />
+</p>
 
 2) Add a configuration
 
+<p align="center">
 <img src="./com/slack-add-configuration.png" alt="slack-add-configuration" width="50%" align="center" />
+</p>
 
 3) Create a bot
 
+<p align="center">
 <img src="./com/slack-add-bot-integration.png" alt="add-bot-integration" width="50%" align="center" />
+</p>
 
 4) Get your bot token
 
+<p align="center">
 <img src="./com/slack-get-the-token.png" alt="get-the-token" width="50%" align="center" />
+</p>
 
 This the token you'll copy and paste in `config.json`
 
@@ -66,7 +74,9 @@ This the token you'll copy and paste in `config.json`
 
 Assuming you called your bot `howl-bot`, create a channel or add it to an existing one.
 
+<p align="center">
 <img src="./com/channel-creation.png" alt="channel-creation" width="50%" align="center" />
+</p>
 
 ## Hardware
 
@@ -75,7 +85,9 @@ There is some pre-built binaries here.
 At work we launch it on a Raspberry PI connected to speakers.
 
 
+<p align="center">
 <img src="./com/howl-slack-raspberry.jpg" alt="howl-slack-raspberry" width="50%" align="center" />
+</p>
 
 ### AWS
 
@@ -139,3 +151,5 @@ The program will output the messages in real-time from the slack channel.
 # License
 
 `Howl Slack` is licensed under the GPLv3 License, sponsored and supported by <a href="https://hypermoon.io/" rel="noopener" target="_blank">HyperMoon</a>.
+
+And special thanks to <a href="https://hypermoon.io/" rel="noopener" target="_blank">FIZIX</a>.

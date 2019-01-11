@@ -152,4 +152,4 @@ The program will output the messages in real-time from the slack channel.
 
 `Howl Slack` is licensed under the GPLv3 License, sponsored and supported by <a href="https://hypermoon.io/" rel="noopener" target="_blank">HyperMoon</a>.
 
-And special thanks to <a href="https://hypermoon.io/" rel="noopener" target="_blank">FIZIX</a>.
+And special thanks to <a href="https://fizix.io/" rel="noopener" target="_blank">FIZIX</a>.

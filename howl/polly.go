@@ -36,6 +36,7 @@ func StringToAudioStream(text string) io.ReadCloser {
 		Text:         aws.String(text),
 		OutputFormat: aws.String(format),
 		VoiceId:      aws.String(voice),
+		SampleRate:   aws.String("22050"),
 	}
 
 	output, err := svc.SynthesizeSpeech(input)

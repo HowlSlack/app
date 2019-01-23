@@ -26,6 +26,7 @@ deps:
 	$(GOGET) github.com/hajimehoshi/oto
 	$(GOGET) github.com/jfreymuth/oggvorbis
 	$(GOGET) github.com/pkg/errors
+	$(GOGET) github.com/hajimehoshi/oto
 
 build-linux:
 	GOOS=linux GOARCH=amd64 $(GOBUILD) -o $(BINARY_UNIX) -v

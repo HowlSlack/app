@@ -1,6 +1,8 @@
 package main
 
 import (
+	"os"
+
 	"github.com/HowlSlack/app/howl"
 )
 
@@ -25,7 +27,10 @@ func main() {
 			as := howl.StringToAudioStream(message)
 			if as != nil {
 				// play it on speakers
-				howl.PlayAudioStream(as)
+				f, _ := os.Open("audio_effects/cha_ching.mp3")
+				howl.PlayAudioStream(f, "mp3")
+				f.Close()
+				howl.PlayAudioStream(as, "vorbis")
 			}
 		}
 	}

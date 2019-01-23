@@ -7,6 +7,8 @@ import (
 func main() {
 	// load config
 	howl.LoadConfig()
+	// init audio speakers
+	howl.InitAudio()
 	// init aws polly services
 	howl.InitPolly()
 	// connect to slack
